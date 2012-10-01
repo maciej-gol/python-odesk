@@ -173,7 +173,7 @@ class HR(Namespace):
 
     '''job api'''
 
-    def get_jobs(self, buyer_team_reference=None,
+    def get_jobs(self, buyer_team_reference,
                  include_sub_teams=False,
                  status=None, created_by=None, created_time_from=None,
                  created_time_to=None, page_offset=0, page_size=20,
@@ -183,7 +183,7 @@ class HR(Namespace):
         This API call can be used to find the reference ID of a specific jobi
 
         Parameters
-          buyer_team_reference  (optional)
+          buyer_team_reference
           include_sub_teams     (optional: defaults to False)
           status                (optional)
           created_by            Creator's user_id (optional)
@@ -196,8 +196,7 @@ class HR(Namespace):
         url = 'jobs'
 
         data = {}
-        if buyer_team_reference:
-            data['buyer_team__reference'] = buyer_team_reference
+        data['buyer_team__reference'] = buyer_team_reference
 
         data['include_sub_teams'] = False
         if include_sub_teams:
@@ -272,7 +271,7 @@ class HR(Namespace):
 
     '''offer api'''
 
-    def get_offers(self, buyer_team_reference=None, status=None,
+    def get_offers(self, buyer_team_reference, status=None,
                    job_ref=None,
                    buyer_ref=None, provider_ref=None, agency_ref=None,
                    created_time_from=None, created_time_to=None,
@@ -281,7 +280,7 @@ class HR(Namespace):
         Retrieve a list of all the offers on a specific job or within a specific team
 
         Parameters
-          buyer_team_reference  The team reference (optional)
+          buyer_team_reference  The team reference
           status                active/filled (optional: defaults to active)
           job_ref               The job reference (optional)
           buyer_ref             (optional)
@@ -295,8 +294,7 @@ class HR(Namespace):
         """
         url = 'offers'
         data = {}
-        if buyer_team_reference:
-            data['buyer_team__reference'] = buyer_team_reference
+        data['buyer_team__reference'] = buyer_team_reference
 
         if status:
             data['status'] = status
