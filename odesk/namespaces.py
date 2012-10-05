@@ -4,11 +4,6 @@ python-odesk version 0.4.1
 (C) 2010-2011 oDesk
 """
 
-import cookielib
-from datetime import date
-import hashlib
-import logging
-import urllib
 import urllib2
 
 
