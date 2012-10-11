@@ -244,7 +244,7 @@ class HR(Namespace):
           job_data      Details of the job
         """
         url = 'jobs'
-        result = self.post(url, {'job_data': job_data})
+        result = self.post(url, job_data)
         return result
 
     def update_job(self, job_id, job_data):
