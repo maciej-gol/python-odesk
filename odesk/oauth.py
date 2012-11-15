@@ -22,9 +22,9 @@ class OAuth(Namespace):
     api_url = 'auth/'
     version = 1
 
-    request_token_url = 'https://www.odesk.com/api/auth/v1/oauth/token/request'
+    request_token_url = 'http://www.odesk.com/api/auth/v1/oauth/token/request'
     authorize_url = 'https://www.odesk.com/services/api/auth'
-    access_token_url = 'https://www.odesk.com/api/auth/v1/oauth/token/access'
+    access_token_url = 'http://www.odesk.com/api/auth/v1/oauth/token/access'
 
     def urlencode(self, url, key, secret, data={}, method='GET'):
         """
