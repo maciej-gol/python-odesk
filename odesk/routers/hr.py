@@ -336,6 +336,100 @@ class HR(Namespace):
         result = self.get(url)
         return result['offer']
 
+    def make_offer(self, job_reference, buyer_team_reference=None,
+                   provider_team_reference=None, provider_reference=None,
+                   profile_key=None, message_from_buyer=None, engagement_title=None,
+                   attached_doc=None, fixed_charge_amount_agreed=None,
+                   fixed_pay_amount_agreed=None, fixed_price_upfront_payment=None,
+                   hourly_pay_rate=None, weekly_salary_charge_amount=None,
+                   weekly_salary_pay_amount=None, weekly_stipend_hours=None,
+                   weekly_hours_limit=None, start_data=None, keep_open=False):
+        """
+          Make an offer to referenced job.
+
+          Parameters
+            job_reference            The Job's reference ID
+            buyer_team_reference     The buyer's team reference ID (Optional)
+            provider_team_reference  The reference id of the provider team (Optional)
+            provider_reference       The provider's reference ID (Optional)
+            profile_key              Unique profile key,
+                                     used if provider_reference absensent (Optional)
+            message_from_buyer       Employer can place a text message
+                                     to this parameter (Optional)
+            engagement_title         The Engagement title (Optional)
+            attached_doc             Attachment (Optional)
+            fixed_charge_amount_agreed    The amount of agreed charge (Optional)
+            fixed_pay_amount_agreed       The amount of agreed pay (Optional)
+            fixed_price_upfront_payment   The amount of upfront payment (Optional)
+            hourly_pay_rate          Hourly pay rate (Optional)
+            weekly_salary_charge_amount   Salary charge amount per week (Optional)
+            weekly_salary_pay_amount      Salary pay amount per week (Optional)
+            weekly_stipend_hours     Stipend hours per week (Optional)
+            weekly_hours_limit       Limit of hours per week (Optional)
+            start_data               The start date of the offer (Optional)
+            keep_open                Leave the job opened.
+                                     (Optional, defaults to False)
+        """
+        url = 'offers'
+        data = {}
+
+        data['job__reference'] = job_reference
+
+        if buyer_team_reference:
+            data['buyer_team__reference'] = buyer_team_reference
+
+        if provider_team_reference:
+            data['provider_team__reference'] = provider_team_reference
+
+        if provider_reference:
+            data['provider__reference'] = provider_reference
+        else:
+            data['profile_key'] = profile_key
+
+        if message_from_buyer:
+            data['message_from_buyer'] = message_from_buyer
+
+        if engagement_title:
+            data['engagement_title'] = engagement_title
+
+        if attached_doc:
+            data['attached_doc'] = attached_doc
+
+        if fixed_charge_amount_agreed:
+            data['fixed_charge_amount_agreed'] = fixed_charge_amount_agreed
+
+        if fixed_pay_amount_agreed:
+            data['fixed_pay_amount_agreed'] = fixed_pay_amount_agreed
+
+        if fixed_price_upfront_payment:
+            data['fixed_price_upfront_payment'] = fixed_price_upfront_payment
+
+        if hourly_pay_rate:
+            data['hourly_pay_rate'] = hourly_pay_rate
+
+        if weekly_salary_charge_amount:
+            data['weekly_salary_charge_amount'] = weekly_salary_charge_amount
+
+        if weekly_salary_pay_amount:
+            data['weekly_salary_pay_amount'] = weekly_salary_pay_amount
+
+        if weekly_stipend_hours:
+            data['weekly_stipend_hours'] = weekly_stipend_hours
+
+        if weekly_hours_limit:
+            data['weekly_hours_limit'] = weekly_hours_limit
+
+        if start_data:
+            data['start_data'] = start_data
+
+        if keep_open:
+            data['keep_open'] = 'yes'
+        else:
+            data['keep_open'] = 'no'
+
+        res = self.post(url, data)
+        return res['reference']
+
     '''engagement api'''
 
     def get_engagements(self, buyer_team_reference=None, include_sub_teams=False,
